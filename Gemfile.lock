@@ -43,5 +43,5 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  mongoid (~> 4.0.0)
+  mongoid
   sinatra

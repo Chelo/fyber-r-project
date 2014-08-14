@@ -1,20 +1,16 @@
 development:
   sessions:
     default:
-      database: fyber-dev
+      database: kumakore-dev
       identity_map_enabled: true
       hosts:
         - localhost:27017
-      options:
-        safe: true
 test:
   sessions:
     default:
-      database: fyber-test
+      database: kumakore-test<%= ENV['TEST_ENV_NUMBER'] %>
       hosts:
         - localhost:27017
-      options:
-        safe: true
 #   production:
 #     sessions:
 #       default:
