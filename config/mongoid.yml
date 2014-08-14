@@ -1,0 +1,23 @@
+development:
+  sessions:
+    default:
+      database: fyber-dev
+      identity_map_enabled: true
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
+test:
+  sessions:
+    default:
+      database: fyber-test
+      hosts:
+        - localhost:27017
+      options:
+        safe: true
+#   production:
+#     sessions:
+#       default:
+#         uri: <%= ENV['MONGODB_URI'] %>
+#         options:
+#           safe: true
