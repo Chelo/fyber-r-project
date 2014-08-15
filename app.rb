@@ -22,6 +22,10 @@ OpenURI::Buffer.send :remove_const, 'StringMax' if OpenURI::Buffer.const_defined
 OpenURI::Buffer.const_set 'StringMax', 0
 helpers Utils
 
+not_found do
+  haml :not_found
+end
+
 get '/packages' do
   @packages = Package.all
   haml :index

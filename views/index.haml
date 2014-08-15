@@ -2,6 +2,14 @@
   %div.col-md-7.col-md-offset-5
     %h1 
       %b R-Packages
+  %div.col-md-6.col-md-offset-3
+    - unless @message.nil? || @message.empty?
+      %div.alert.alert-danger.alert-dimissible{role: 'alert'}
+        %button.close{"type" => "button", "data-dismiss" => "alert"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+        %p 
+          =@message
   %div.col-md-12
     %div.alert.alert-warning
       %p
@@ -11,14 +19,6 @@
       %p
         %h5 Enjoy!
 
-  %div.col-md-6.col-md-offset-3
-    - unless @message.nil? || @message.empty?
-      %div.alert.alert-danger.alert-dimissible{role: 'alert'}
-        %button.close{"type" => "button", "data-dismiss" => "alert"}
-          %span{"aria-hidden" => "true"} &times;
-          %span.sr-only Close
-        %p 
-          =@message
 %div.input-group
   %span.input-group-addon Filter
   %input#filter.form-control{type:"text", placeholder:"Type here..."}
