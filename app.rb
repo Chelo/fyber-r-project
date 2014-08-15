@@ -22,5 +22,18 @@ OpenURI::Buffer.send :remove_const, 'StringMax' if OpenURI::Buffer.const_defined
 OpenURI::Buffer.const_set 'StringMax', 0
 
 get '/packages' do
-  @packages = Packages.all
+  @packages = Package.all
+  haml :index
+end
+
+get '/packages/:id' do
+  @package = Package.where(id: params[:id]).first
+  if @package
+    @package_vs = @package.package_versions if @package
+    haml :show
+  else
+    @message = "Invalid package id"
+    @packages = Package.all
+    haml :index
+  end
 end

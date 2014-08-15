@@ -1,0 +1,44 @@
+%div.row
+  %div.col-md-7.col-md-offset-5
+    %h1 
+      %b R-Packages
+  %div.col-md-12
+    %div.alert.alert-warning
+      %p
+        %h5 Welcome to R-Package searching page. To search one package you can write any relation word on the filter (name, version, author, etc), or make click on the Headers name to sort the table for the field selected.
+      %p
+        %h5 To know details about any package, just select the package name.
+      %p
+        %h5 Enjoy!
+
+  %div.col-md-6.col-md-offset-3
+    - unless @message.nil? || @message.empty?
+      %div.alert.alert-danger.alert-dimissible{role: 'alert'}
+        %button.close{"type" => "button", "data-dismiss" => "alert"}
+          %span{"aria-hidden" => "true"} &times;
+          %span.sr-only Close
+        %p 
+          =@message
+%div.input-group
+  %span.input-group-addon Filter
+  %input#filter.form-control{type:"text", placeholder:"Type here..."}
+%br
+%table#packages.table.table-striped.tablesorter
+  %thead
+    %tr
+      %th Package
+      %th Version
+      %th Authors
+      %th Maintainer
+      %th Publication Date
+  %tbody.searchable
+    - @packages.each do |package|
+      - package_v = package.package_versions.last
+      %tr 
+        %td 
+          %a{href:"/packages/#{package.id}"}= package.name
+        %td= package_v.version
+        %td&= package_v.authors
+        %td&= package_v.maintainers
+        %td= package_v.publication_date.strftime("%Y-%m-%d %I:%M:%S")
+

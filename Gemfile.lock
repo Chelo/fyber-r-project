@@ -13,6 +13,8 @@ GEM
     bson (2.3.0)
     builder (3.2.2)
     connection_pool (2.0.0)
+    haml (4.0.5)
+      tilt
     httparty (0.13.1)
       json (~> 1.8)
       multi_xml (>= 0.5.2)
@@ -52,6 +54,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  haml
   httparty
   mongoid
   sinatra

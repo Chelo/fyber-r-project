@@ -10,23 +10,28 @@ module Utils
     #puts authors
 
     #getting tar.gz
-    open(package_url) do |remote_file|
-      #getting tar
-      tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.open(remote_file))
-      tar_extract.rewind
-      tar_extract.each do |entry|
-        #search description file
-        if entry.full_name =~ description_path
-          content = entry.read.encode("UTF-8", "binary", invalid: :replace, undef: :replace, replace: '')
-          package_info = Dcf.parse(content)[0]
-          puts package_info
-          puts ""
+    begin
+      open(package_url) do |remote_file|
+        #getting tar
+        tar_extract = Gem::Package::TarReader.new(Zlib::GzipReader.open(remote_file))
+        tar_extract.rewind
+        tar_extract.each do |entry|
+          #search description file
+          if entry.full_name =~ description_path
+            content = entry.read.encode("UTF-8", "binary", invalid: :replace, undef: :replace, replace: '')
+            package_info = Dcf.parse(content)[0]
+            puts package_info
+            puts ""
 
-          create_package_version(package, package_info)
+            create_package_version(package, package_info)
+          end
         end
+        tar_extract.close
+        remote_file.close
       end
-      tar_extract.close
-      remote_file.close
+    rescue OpenURI::Error, Timeout::Error => e
+      puts "#{e.class}: #{e.message} with package #{name}. Try with next package..."
+      return
     end
   end
 
@@ -64,7 +69,7 @@ module Utils
     #getting the info
     package_v = package.package_versions.new
     package_v.version = package_info["Version"]
-    package_v.publication_date = Date.parse(publication_date, "%Y-%m-%d %I:%M:%S")
+    package_v.publication_date = Time.parse(publication_date)
     package_v.title = package_info["Title"]
     package_v.description = package_info["Description"]
     package_v.maintainers = package_info['Maintainer']

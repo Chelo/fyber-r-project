@@ -1,0 +1,28 @@
+%div.row
+  %div.col-md-2.col-md-offset-5
+    %h1= @package.name
+  %div.col-md-12
+    -@package_vs.each do |p_v|
+      %div.panel.panel-primary
+        %div.panel-heading
+          %h3
+            Version: #{p_v.version}
+        %div.panel-body
+          %p
+            %b Title: 
+            =p_v.title
+          %p
+            %b Description:
+            =p_v.description
+          %p
+            %b Publication date:
+            =p_v.publication_date.strftime("%Y-%m-%d %I:%M:%S")
+          %p
+            %b Authors:
+            &=p_v.authors
+          %p
+            %b Maintainer:
+            &=p_v.maintainers
+          %p
+            %a.btn.btn-success{href:"http://cran.r-project.org/src/contrib/#{@package.name}_#{p_v.version}.tar.gz"} Download
+
