@@ -2,7 +2,6 @@ module Utils
   def get_package_info name, version, package, settings
     description_path = /DESCRIPTION/
     package_url = "#{settings.base_url}#{name}_#{version}.tar.gz"
-    puts package_url
 
     #for testing
     #package_info = {"Package"=>"AdequacyModel", "Type"=>"Package", "Title"=>"Adequacy of probabilistic models and generation of pseudo-random numbers.", "Authors@R"=>"c(person(given = \"Pedro Rafael\", family = \"Diniz Marinho\", role = c(\"aut\", \"cre\"), email = \"pedro.rafael.marinho@gmail.com\"), person(given = \"Marcelo\", family = \"Bourguignon\", role = c(\"aut\",\"ctb\"), email = \"m.p.bourguignon@gmail.com\"), person(given = \"Cicero Rafael\", family = \"Barros Dias\", role = c(\"aut\",\"ctb\"), email = \"cicerorafael@gmail.com\"))", "Version"=>"1.0.8", "Date"=>"2013-09-12", "Maintainer"=>"Pedro Rafael Diniz Marinho <pedro.rafael.marinho@gmail.com>", "Description"=>"This package provides some useful functions for calculating quality measures for adjustment, including statistics Kolmogorov-Smirnov, Cramer-von Mises and Anderson-Darling. These statistics are often used to compare models not equipped. Also provided are other measures of fitness, such as AIC, CAIC, BIC and HQIC. The package also provides functions for generating pseudo-random number of random variables that follow the following probability distributions: Kumaraswamy Birnbaum-Saunders, Kumaraswamy Pareto, Exponentiated Weibull and Kumaraswamy Weibull.", "URL"=>"http://www.r-project.org", "License"=>"GPL (>= 2)", "Author"=>"Pedro Rafael Diniz Marinho [aut, cre], Marcelo Bourguignon [aut, ctb], Cicero Rafael Barros Dias [aut, ctb]", "NeedsCompilation"=>"no", "Repository"=>"CRAN", "Packaged"=>"2013-12-20 15:38:04 UTC; pedro", "Date/Publication"=>"2013-12-20 17:01:24"}
@@ -20,9 +19,6 @@ module Utils
           if entry.full_name =~ description_path
             content = entry.read.encode("UTF-8", "binary", invalid: :replace, undef: :replace, replace: '')
             package_info = Dcf.parse(content)[0]
-            puts package_info
-            puts ""
-
             create_package_version(package, package_info)
           end
         end
@@ -30,7 +26,7 @@ module Utils
         remote_file.close
       end
     rescue OpenURI::Error, Timeout::Error => e
-      puts "#{e.class}: #{e.message} with package #{name}. Try with next package..."
+      logger.error "#{e.class}: #{e.message} with package #{name}. Try with next package..."
       return
     end
   end
@@ -41,8 +37,7 @@ module Utils
     re_persons = Regexp.new('c?\(?\s*(?<persons>.+)\)?')
     m = re_persons.match(authors_string)
     if m
-      p = m['persons'].split("person")
-      p.delete("")
+      p = m['persons'].split("person").delete("")
       #get name, last name and email
       p.each do |a|
         re_data = Regexp.new('\((given\s?=\s?)?"(?<name>.+?)",\s?(family\s?=\s?)?"(?<lastname>.*?)",((?!email).)*\s?(email\s?=\s?"(?<email>.+?)")?')
@@ -81,5 +76,9 @@ module Utils
     puts package_v.inspect
 
     package_v.save!
+  end
+
+  def logger
+    LOGGER
   end
 end

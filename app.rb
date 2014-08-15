@@ -20,6 +20,7 @@ Mongoid.load!("config/mongoid.yml")
 #more info: http://adayinthepit.com/2011/06/03/ruby-openuri-open-returns-stringio-fileio/
 OpenURI::Buffer.send :remove_const, 'StringMax' if OpenURI::Buffer.const_defined?('StringMax')
 OpenURI::Buffer.const_set 'StringMax', 0
+helpers Utils
 
 get '/packages' do
   @packages = Package.all

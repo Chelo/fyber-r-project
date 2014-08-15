@@ -3,7 +3,6 @@ include Utils
 module Services
   class GetPackageService
     def self.run settings
-      puts "Looking for packages file"
       #get packages document
       packages = get_packages_hash settings
 
@@ -13,21 +12,21 @@ module Services
       packages.each do |package|
         name = package["Package"]
         version = package["Version"]
-        puts "Package: #{name}, Version: #{version}"
+        logger.info "Reading package: #{name}, version: #{version}"
         #search package
         pack = Package.where(name: name).first
         if pack
-          puts "Package exists"
+          logger.info "Package already exists"
           #search package version
           pack_version = pack.package_versions.where(version: version).first
           unless pack_version
-            puts "Package version doesn't exists"
+            logger.info "Package version doesn't exists"
             #create new package version
             get_package_info(name, version, pack, settings)
           end
         else
           #create new package
-          puts "package doesn't exists"
+          logger.info "Package doesn't exists"
           pack = Package.create(name: name)
           get_package_info(name, version, pack, settings)
         end
