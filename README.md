@@ -9,7 +9,7 @@ Setup
   1. Clone the repo
   2. Run `bundle install` from the repository directory
   3. Run `ruby app.rb`
-  4. [Open the page]("http://localhost:4567/packages")
+  4. Open the page *"http://localhost:4567/packages"*
   5. If you want to load the packages run `rake search_packages`. You
      can see the process on `log/output.log` file
      **NOTE:** this can take some time because it has to read each
