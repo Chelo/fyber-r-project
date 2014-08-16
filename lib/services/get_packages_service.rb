@@ -8,21 +8,21 @@ module Services
       packages.each do |package|
         name = package["Package"]
         version = package["Version"]
-        logger.info "Reading package: #{name}, version: #{version}"
+        $log.info "Reading package: #{name}, version: #{version}"
         #search package
         pack = Package.where(name: name).first
         if pack
-          logger.info "Package already exists"
+          $log.info "Package already exists"
           #search package version
           pack_version = pack.package_versions.where(version: version).first
           unless pack_version
-            logger.info "Package version doesn't exists"
+            $log.info "Package version doesn't exists"
             #create new package version
             get_package_info(name, version, pack, settings)
           end
         else
           #create new package
-          logger.info "Package doesn't exists"
+          $log.info "Package doesn't exists"
           pack = Package.create(name: name)
           get_package_info(name, version, pack, settings)
         end

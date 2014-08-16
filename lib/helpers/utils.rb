@@ -21,7 +21,7 @@ module Utils
         remote_file.close
       end
     rescue Timeout::Error => e
-      logger.error "#{e.class}: #{e.message} with package #{name}. Try with next package..."
+      $log.error "#{e.class}: #{e.message} with package #{name}. Try with next package..."
       return
     end
   end
