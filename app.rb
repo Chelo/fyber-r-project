@@ -27,6 +27,7 @@ not_found do
 end
 
 get '/packages' do
+  $log.info "*********************TESTING*****************"
   @packages = Package.all
   haml :index
 end
