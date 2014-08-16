@@ -10,9 +10,6 @@ require 'services'
 require 'libs'
 require 'helpers'
 
-
-ENV['RACK_ENV'] ||= 'development'
-
 #load mongoid
 Mongoid.load!("config/mongoid.yml")
 

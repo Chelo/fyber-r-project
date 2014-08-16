@@ -1,4 +1,5 @@
 require File.expand_path '../../../spec_helper.rb', __FILE__
+ENV['RACK_ENV'] = 'test'
 
 describe "Utils" do
   include Rack::Test::Methods
