@@ -13,9 +13,9 @@
   %div.col-md-12
     %div.alert.alert-warning
       %p
-        %h5 Welcome to R-Package searching page. To search one package you can write any relation word on the filter (name, version, author, etc), or make click on the Headers name to sort the table for the field selected.
+        %h5 Welcome to R-Package searching page. To search one package you can write any related word on the filter (name, version, author, etc), or you can make click on the Headers name from the table to sort the column.
       %p
-        %h5 To know details about any package, just select the package name.
+        %h5 For knowing more details about any package, just click on the package name.
       %p
         %h5 Enjoy!
 
@@ -34,17 +34,18 @@
   %tbody.searchable
     - @packages.each do |package|
       - package_v = package.package_versions.last
-      %tr 
-        %td 
-          %a{href:"/packages/#{package.id}"}= package.name
-        %td= package_v.version
-        %td&= package_v.authors
-        %td&= package_v.maintainers
-        %td= package_v.publication_date.strftime("%Y-%m-%d %I:%M:%S")
+      - if package_v
+        %tr 
+          %td 
+            %a{href:"/packages/#{package.id}"}= package.name
+          %td= package_v.version
+          %td&= package_v.authors
+          %td&= package_v.maintainers
+          %td= package_v.publication_date.strftime("%Y-%m-%d %I:%M:%S")
 
 - if @packages.empty?
   %div.row
     %div.col-md-12
       %div.alert.alert-success
-        %p Not packages charget yet
+        %p Not packages loaded yet
 
