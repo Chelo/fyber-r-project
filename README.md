@@ -21,8 +21,11 @@ Testing
 
 Config
 -------
-  You can change the settings for load more than 50 packages on `config/config.rb`
+  1. You can change the settings for load more than 50 packages on `config/config.rb`
 file
+  2. If you want the job `search_packages` be executed every day at
+     12:00pm run `whenever` and later run `whenever --update-crontab`.
+More info [here](https://github.com/javan/whenever)
 
 Notes
 ------
