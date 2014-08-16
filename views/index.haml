@@ -42,3 +42,9 @@
         %td&= package_v.maintainers
         %td= package_v.publication_date.strftime("%Y-%m-%d %I:%M:%S")
 
+- if @packages.empty?
+  %div.row
+    %div.col-md-12
+      %div.alert.alert-success
+        %p Not packages charget yet
+

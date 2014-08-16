@@ -5,10 +5,6 @@ module Services
     def self.run settings
       #get packages document
       packages = get_packages_hash settings
-
-      #for testing
-       #packages = [{"Package"=>"sdckmsd", "Version"=>"1.7-05", "Depends"=>"R (>= 2.15.0), xtable, pbapply", "Suggests"=>"randomForest, e1071", "License"=>"GPL (>= 2)", "NeedsCompilation"=>"no"}]
-
       packages.each do |package|
         name = package["Package"]
         version = package["Version"]

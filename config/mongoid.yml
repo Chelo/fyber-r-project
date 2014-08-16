@@ -1,14 +1,14 @@
 development:
   sessions:
     default:
-      database: kumakore-dev
+      database: r-project-dev
       identity_map_enabled: true
       hosts:
         - localhost:27017
 test:
   sessions:
     default:
-      database: kumakore-test<%= ENV['TEST_ENV_NUMBER'] %>
+      database: r-project-test
       hosts:
         - localhost:27017
 #   production:
