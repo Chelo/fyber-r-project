@@ -26,6 +26,9 @@ module Utils
     end
   end
 
+  #Funtion created for trying to get more info from the authors using Authors@R
+  #finally it will not be used for inconsistent formats, it's more practice get
+  #the author info from author key
   def try_get_authors authors_string
     #get persons
     authors = ""

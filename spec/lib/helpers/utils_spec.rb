@@ -6,19 +6,15 @@ describe "Utils" do
     Sinatra::Application
   end
   describe "get_package_info" do
-    #before do
-      #file = Array.new()
-      #allow(Utils).to receive(:open).and_return file
-      #expect(Zlib::GzipReader).to receive(:open).and_return(file)
-      #expect(Gem::Package::TarReader).to receive(:new).and_return(file)
-      #expect(Utils).to receive(:create_package_version).and_return true
-      #allow(file).to receive(:rewind)
-      #allow(file).to receive(:close)
-    #end
-    #it "should get package and create package version" do
-      ##paq = double("package")
-      ##app.get_package_info("shape", "1.4.1", paq, app.settings)
-    #end
+    before do
+      file = "BaBooN_0.1-6.tar.gz"
+      allow(Utils).to receive(:open).and_return file
+      expect(app).to receive(:create_package_version).and_return true
+    end
+    it "should get package and create package version" do
+      paq = double("package")
+      app.get_package_info("shape", "1.4.1", paq, app.settings)
+    end
   end
 
   describe "get_package_hash" do
