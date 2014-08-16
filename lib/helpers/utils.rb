@@ -68,8 +68,4 @@ module Utils
     package_v.authors = package_info['Author']
     package_v.save!
   end
-
-  def logger
-    LOGGER
-  end
 end
