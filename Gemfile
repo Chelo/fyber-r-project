@@ -7,3 +7,4 @@ gem "haml"
 gem "rspec"
 gem "rack-test"
 gem "rspec-mocks"
+gem "whenever", :require => false
