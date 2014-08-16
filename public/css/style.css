@@ -37,6 +37,10 @@
 .bs-callout-danger h4{ 
   color: #D8524E;
 }
+
+.header {
+    cursor: pointer;
+}
  
  
 /*
