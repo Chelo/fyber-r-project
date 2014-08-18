@@ -14,6 +14,7 @@ module Utils
           if entry.full_name =~ description_path
             content = entry.read.encode("UTF-8", "binary", invalid: :replace, undef: :replace, replace: '')
             package_info = Dcf.parse(content)[0]
+            $log.debug package_info
             create_package_version(package, package_info)
           end
         end

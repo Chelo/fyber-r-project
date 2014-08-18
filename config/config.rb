@@ -8,7 +8,7 @@ configure do
 end
 
 configure :production do
-  $log.level = Logger::INFO
+  $log.level = Logger::DEBUG
 end
 
 configure :development do
