@@ -30,10 +30,9 @@ More info [here](https://github.com/javan/whenever)
 
 Notes
 ------
-  * This app is on [heroku](http://r-packages.herokuapp.com/packages) but
-for now it doesn't have any package for [problems with
-dyno](https://devcenter.heroku.com/articles/error-codes#r14-memory-quota-exceeded) when runs the rake task for load packages. This error is being investigated
- 
+  * This app is on [heroku](http://r-packages.herokuapp.com/packages) but for now it doesn't have any package for [problems with dyno](https://devcenter.heroku.com/articles error-codes#r14-memory-quota-exceeded) when runs the rake task for load packages. This error is being investigated
+  * [UPDATE]: The app is now available on [heroku](http://r-packages.herokuapp.com/packages) and now show 663 packages. The problem was fixed and some improvements 
+were added to the code to make it more efficient.
 
 
 
