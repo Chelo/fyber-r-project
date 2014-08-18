@@ -1,5 +1,5 @@
 Dir.mkdir('log') unless File.exist?('log')
-$log = Logger.new('log/output.log','weekly')
+$log = Logger.new(STDOUT)
 
 configure do
   set :packages_url, "http://cran.r-project.org/src/contrib/PACKAGES"
