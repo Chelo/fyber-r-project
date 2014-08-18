@@ -63,6 +63,7 @@ module Utils
   end
 
   def create_package_version package, package_info
+    $log.info "Creating package version for #{package.name}"
     publication_date = package_info["Date/Publication"]
     #getting the info
     package_v = package.package_versions.new
