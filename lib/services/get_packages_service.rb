@@ -12,7 +12,7 @@ module Services
           #search package
           pack = Package.where(name: name).first
           if pack
-            $log.info "Package already exist"
+            $log.info "Package already exists"
             #search package version
             pack_version = pack.package_versions.where(version: version).first
             unless pack_version
