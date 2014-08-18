@@ -13,6 +13,7 @@ module Utils
           #search description file
           if entry.full_name =~ description_path
             content = entry.read.encode("UTF-8", "binary", invalid: :replace, undef: :replace, replace: '')
+            $log.debug "URL: #{package_url}"
             $log.debug "CONTENT DESCRIPTION: #{content}"
             package_info = Dcf.parse(content)[0]
             $log.debug package_info
