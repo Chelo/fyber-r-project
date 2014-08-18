@@ -23,7 +23,7 @@ Testing
 Config
 -------
   1. You can change the settings for load more than 50 packages on `config/config.rb`
-file
+file, if you want to load all packages, put `set :number_of_packages, nil`
   2. If you want the job `search_packages` be executed every day at
      12:00pm run `whenever` and later run `whenever --update-crontab`.
 More info [here](https://github.com/javan/whenever)
@@ -31,7 +31,7 @@ More info [here](https://github.com/javan/whenever)
 Notes
 ------
   * This app is on [heroku](http://r-packages.herokuapp.com/packages) but for now it doesn't have any package for [problems with dyno](https://devcenter.heroku.com/articles error-codes#r14-memory-quota-exceeded) when runs the rake task for load packages. This error is being investigated
-  * [UPDATE]: The app is now available on [heroku](http://r-packages.herokuapp.com/packages) and now show 663 packages. The problem was fixed and some improvements 
+  * [UPDATE]: The app is now available on [heroku](http://r-packages.herokuapp.com/packages) and now shows 663 packages. The problem was fixed and some improvements 
 were added to the code to make it more efficient.
 
 

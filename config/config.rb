@@ -2,7 +2,7 @@ Dir.mkdir('log') unless File.exist?('log')
 configure do
   set :packages_url, "http://cran.r-project.org/src/contrib/PACKAGES"
   set :base_url, "http://cran.r-project.org/src/contrib/"
-  set :number_of_packages, nil
+  set :number_of_packages, 50
 end
 
 configure :production do
