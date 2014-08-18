@@ -51,12 +51,15 @@ module Utils
     authors
   end
 
-  def get_packages_hash settings
+  def get_packages_hash(settings)
     response = HTTParty.get(settings.packages_url)
-    all_packages = Dcf.parse response.body.force_encoding("UTF-8")
-
-    #get just a few packages
-    all_packages.take settings.number_of_packages
+    split_packages = response.body.force_encoding("UTF-8").split("\n\n")
+    counter = 0
+    l = settings.number_of_packages || split_packages.length
+    while counter < l
+      counter += 50
+      yield Dcf.parse split_packages[(counter-50)..(counter>l ? l-1 : counter-1)].join("\n\n")
+    end
   end
 
   def create_package_version package, package_info
