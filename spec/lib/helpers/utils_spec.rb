@@ -8,26 +8,32 @@ describe "Utils" do
   end
   describe "get_package_info" do
     before do
-      file = "BaBooN_0.1-6.tar.gz"
-      allow(Utils).to receive(:open).and_return file
+      file = File.dirname(__FILE__) + '/BaBooN_0.1-6.tar.gz'
+      expect(app).to receive(:open).and_yield(file)
       expect(app).to receive(:create_package_version).and_return true
+      allow(file).to receive(:close)
     end
     it "should get package and create package version" do
       paq = double("package")
-      app.get_package_info("shape", "1.4.1", paq, app.settings)
+      app.get_package_info("BaBooN", "1.4.1", paq, app.settings)
     end
   end
 
   describe "get_package_hash" do
     before do
       res = double("response")
-      @packages = [{"Package"=>"sdckmsd", "Version"=>"1.7-05", "Depends"=>"R (>= 2.15.0), xtable, pbapply", "Suggests"=>"randomForest, e1071", "License"=>"GPL (>= 2)", "NeedsCompilation"=>"no"}]
       allow(HTTParty).to receive(:get).and_return(res)
-      allow(res).to receive_message_chain(:body, :force_encoding)
-      allow(Dcf).to receive(:parse).and_return(@packages)
+      packages_string = ['Package: yhat
+      Version: 2.0-0
+      Depends: R (>= 2.7.0)
+      Imports: yacca, miscTools, plotrix, boot
+      Suggests: MBESS
+      License: GPL (>= 2)
+      NeedsCompilation: no']
+      allow(res).to receive_message_chain(:body, :force_encoding, :split).and_return(packages_string)
     end
     it "return package hash" do
-      expect(app.get_packages_hash(app.settings)).to eq(@packages)
+      expect{|b| app.get_packages_hash(app.settings, &b)}.to yield_control
     end
   end
 

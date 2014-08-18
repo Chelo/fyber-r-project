@@ -1,6 +1,4 @@
 Dir.mkdir('log') unless File.exist?('log')
-$log = Logger.new(STDOUT)
-
 configure do
   set :packages_url, "http://cran.r-project.org/src/contrib/PACKAGES"
   set :base_url, "http://cran.r-project.org/src/contrib/"
@@ -8,10 +6,12 @@ configure do
 end
 
 configure :production do
+  $log = Logger.new(STDOUT)
   $log.level = Logger::DEBUG
 end
 
-configure :development do
+configure :development, :test  do
+  $log = Logger.new("log/output.log", "weekly")
   $log.level = Logger::DEBUG
 end
 
