@@ -11,15 +11,12 @@ module Services
           $log.info "Reading package: #{name}, version: #{version}"
           #search package
           pack = Package.where(name: name).first
-          if pack
-            $log.info "Package already exists"
-            #search package version
-            pack_version = pack.package_versions.where(version: version).first
-            unless pack_version
-              $log.info "Package version doesn't exist"
-              #create new package version
-              get_package_info(name, version, pack, settings)
-            end
+
+          #check if pack and package version exists
+          if pack && !pack.package_versions.where(version: version).exists?
+            $log.info "Package already exists but package version doesn't exist"
+            #create new package version
+            get_package_info(name, version, pack, settings)
           else
             #create new package
             $log.info "Package doesn't exist"

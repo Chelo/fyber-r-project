@@ -17,7 +17,7 @@ describe "Services::GetPackageService" do
       before do
         paq = double("package")
         allow(Package).to receive_message_chain(:where, :first).and_return(paq)
-        allow(paq).to receive_message_chain(:package_versions, :where, :first).and_return(nil)
+        allow(paq).to receive_message_chain(:package_versions, :where, :exists?).and_return(false)
       end
       context "if pack version doesnt exist" do
         it "create new package version" do

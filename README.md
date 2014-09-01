@@ -1,39 +1,16 @@
 Fyber R-Project
 ===============
 
-  This challenge was made using Ruby 2.0.0 with [Sinatra](http://www.sinatrarb.com/) and
+This is a project created as a challenge for Fyber. 
+It consists of a web page that manage the most currently information about
+each [R](http://cran.r-project.org/) package, so you can find quickly the info and download the
+package.
+
+
+This challenge was made using Ruby 2.0.0 with [Sinatra](http://www.sinatrarb.com/) and
 [Rspec](http://rspec.info/). 
 
-Setup
------
-  1. Clone the repo
-  2. Run `bundle install` from the repository directory
-  3. Run `ruby app.rb`
-  4. Open the page *"http://localhost:4567/packages"*
-  5. If you want to load the packages run `rake search_packages`. You
-     can see the process on `log/output.log` file.
+You can chek this project online [here](http://r-packages.herokuapp.com/packages). 
 
-**NOTE:** this can take some time because it has to read each
-tar.gz file.
-
-Testing
--------
-  Run `rspec spec`
-
-Config
--------
-  1. You can change the settings for load more than 50 packages on `config/config.rb`
-file, if you want to load all packages, put `set :number_of_packages, nil`
-  2. If you want the job `search_packages` be executed every day at
-     12:00pm run `whenever` and later run `whenever --update-crontab`.
-More info [here](https://github.com/javan/whenever)
-
-Notes
-------
-  * This app is on [heroku](http://r-packages.herokuapp.com/packages) but for now it doesn't have any package for [problems with dyno](https://devcenter.heroku.com/articles error-codes#r14-memory-quota-exceeded) when runs the rake task for load packages. This error is being investigated
-  * [UPDATE]: The app is now available on [heroku](http://r-packages.herokuapp.com/packages) and now shows 663 packages. The problem was fixed and some improvements 
-were added to the code to make it more efficient.
-
-
-
-
+For now it saves 600 packages but the idea is work with all the
+packages.
